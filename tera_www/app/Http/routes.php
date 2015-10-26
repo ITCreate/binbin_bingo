@@ -11,11 +11,13 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'BingoController@index');
 
 Route::get('home', 'HomeController@index');
+Route::resource('bingo', 'Api\Bingo');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
