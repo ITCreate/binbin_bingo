@@ -20,12 +20,15 @@
 
   app.controller('Index', [
     '$scope', '$http', function($s, $h) {
-      $s.init = function() {};
+      $s.init = function() {
+        return $s.text = localStorage.getItem("search");
+      };
       $s.search = function() {
         $s.isSearch = true;
         $s.searchData = $s.text.split(',').filter(function(x, i, self) {
           return self.indexOf(x) === i;
         });
+        localStorage.setItem("search", $s.searchData);
         console.log($s.searchData);
         return $h.get('/bingo', {
           params: {

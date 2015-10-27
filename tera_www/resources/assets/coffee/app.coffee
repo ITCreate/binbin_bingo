@@ -16,10 +16,11 @@ app.config ['$routeProvider', ($routeProvider) ->
 
 app.controller 'Index', ['$scope', '$http', ($s, $h)->
   $s.init = ->
-#    alert("")
+    $s.text = localStorage.getItem("search")
   $s.search = ->
     $s.isSearch = true
     $s.searchData = $s.text.split(',').filter((x,i,self)->self.indexOf(x) is i)
+    localStorage.setItem("search", $s.searchData)
     console.log $s.searchData
     $h.get('/bingo', {
       params: {
