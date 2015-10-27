@@ -14,32 +14,31 @@ class Bingo extends Controller {
 	 */
 	public function index(Request $req)
 	{
-		$fetch = $req->get('fetch');
-		$numbers = $req->get('numbers');
+		$numbers = $req->get('n');
 		if(empty($numbers)){
 			return \App\Bingo::all()->keyBy('id');
 		}else{
 			$x1 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereX(1)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 3)->with('numbers')->get();
+				whereX(1)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
 			$x2 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereX(2)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 3)->with('numbers')->get();
+				whereX(2)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
 			$x3 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
 				whereX(3)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 3)->with('numbers')->get();
 			$x4 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereX(4)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 3)->with('numbers')->get();
+				whereX(4)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
 			$x5 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereX(5)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 3)->with('numbers')->get();
+				whereX(5)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
 
 			$y1 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereY(1)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 3)->with('numbers')->get();
+				whereY(1)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
 			$y2 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereY(2)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 3)->with('numbers')->get();
+				whereY(2)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
 			$y3 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
 				whereY(3)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 3)->with('numbers')->get();
 			$y4 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereY(4)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 3)->with('numbers')->get();
+				whereY(4)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
 			$y5 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereY(5)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 3)->with('numbers')->get();
+				whereY(5)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
 
 			$xy1 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
 				orWhere(function($query){
@@ -97,9 +96,22 @@ class Bingo extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $req)
 	{
-		//
+        $this->validate($req, ['name', 'data']);
+        $name = $req->json('name');
+        $data = $req->json('data');
+        foreach ($data as $x_i => $row) {
+            foreach($row as $y_i => $number){
+                $bingo = \App\Bingo::create([
+                    'card_id'   => $name,
+                    'number'    => $number,
+                    'x'         => ($x_i + 1),
+                    'y'         => ($y_i + 1)
+                ]);
+            }
+        }
+        return $bingo;
 	}
 
 	/**
