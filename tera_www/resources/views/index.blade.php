@@ -118,7 +118,7 @@
                 <div class="content">
                     <div class="title">BinBin Bingo</div>
                     <div class="quote">ITCreate Club.</div>
-                    <a href="" class="btn pure-button"><b>Next</b></a>
+                    <a href="/#/app" class="btn pure-button"><b>Next</b></a>
                 </div>
             </div>
         </div>
