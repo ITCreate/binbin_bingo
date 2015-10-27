@@ -172,7 +172,7 @@ class Bingo extends Controller {
 	 */
 	public function destroy($id)
 	{
-		\App\Bingo::whereCardId($id)->delete();
+		return \App\Bingo::whereCardId($id)->delete();
 	}
 
 }

@@ -18,9 +18,8 @@ app.controller 'Index', ['$scope', '$http', ($s, $h)->
   $s.init = ->
 #    alert("")
   $s.search = ->
-    console.log "search"
     $s.isSearch = true
-    $s.searchData = $s.text.split(',')
+    $s.searchData = $s.text.split(',').filter((x,i,self)->self.indexOf(x) is i)
     console.log $s.searchData
     $h.get('/bingo', {
       params: {
@@ -35,8 +34,14 @@ app.controller 'Index', ['$scope', '$http', ($s, $h)->
       $s.selectBingo = res.data
     )
   $s.cc = (number)->
-    console.log number
+#    console.log number
     number == 0 or $s.searchData.indexOf(number+"") != -1
+  $s.delete = ->
+    cardId = $s.selectBingo[0]['card_id']
+    $h.delete('/bingo/' + cardId).then(->
+      $s.search()
+      $s.selectBingo = ""
+    )
 ]
 
 app.controller 'topController', ['$scope', ($s) ->

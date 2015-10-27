@@ -16,7 +16,7 @@ Blade::setEscapedContentTags('<%%', '%%>');   // for escaped data
 Route::get('/', 'BingoController@index');
 
 Route::get('home', 'HomeController@index');
-Route::resource('bingo', 'Api\Bingo');
+Route::resource('bingo', 'Api\Bingo', ['only' => ['index', 'create', 'show','store',  'destroy']]);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

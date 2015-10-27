@@ -64,7 +64,9 @@
                 padding: 0.5em;
                 border: 1px solid white;
             }
-
+            .button-error {
+                background: rgb(202, 60, 60); /* this is a maroon */
+            }
         </style>
 	</head>
 	<body>
@@ -83,7 +85,7 @@
                     </div>
                     <form class="pure-form">
                         <div class="pure-control-group">
-                            <input class="pure-input-1" type="text" placeholder="id" ng-model="text">
+                            <input class="pure-input-1" type="text" placeholder="id,id,id,id" ng-model="text">
                         </div>
                         <div class="pure-control-group">
                             <button type="submit" ng-disable="isSearch" class="pure-button" ng-click="search()">Search</button>
@@ -102,11 +104,14 @@
                     </span>
                 </div>
                 <div class="pure-u-1-3">
-                    <div>
+                    <div ng-show="selectBingo">
+                        <p>card_id: <b>{{selectBingo[0]['card_id']}}</b></p>
                         <button ng-repeat="b in selectBingo track by $index"
                                 class="pure-u-1-5 pure-button bingo-button" ng-class="{'button-warning': cc(b.number)}">
                             {{b.number}}
                         </button>
+                        <p><button class="pure-button pure-button-error" ng-click="delete()">ビンゴ完了</button>
+                        </p>
                     </div>
                 </div>
             </div>

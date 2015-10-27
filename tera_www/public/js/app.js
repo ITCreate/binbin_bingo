@@ -22,9 +22,10 @@
     '$scope', '$http', function($s, $h) {
       $s.init = function() {};
       $s.search = function() {
-        console.log("search");
         $s.isSearch = true;
-        $s.searchData = $s.text.split(',');
+        $s.searchData = $s.text.split(',').filter(function(x, i, self) {
+          return self.indexOf(x) === i;
+        });
         console.log($s.searchData);
         return $h.get('/bingo', {
           params: {
@@ -40,9 +41,16 @@
           return $s.selectBingo = res.data;
         });
       };
-      return $s.cc = function(number) {
-        console.log(number);
+      $s.cc = function(number) {
         return number === 0 || $s.searchData.indexOf(number + "") !== -1;
+      };
+      return $s["delete"] = function() {
+        var cardId;
+        cardId = $s.selectBingo[0]['card_id'];
+        return $h["delete"]('/bingo/' + cardId).then(function() {
+          $s.search();
+          return $s.selectBingo = "";
+        });
       };
     }
   ]);
