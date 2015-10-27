@@ -67,6 +67,9 @@
             .button-error {
                 background: rgb(202, 60, 60); /* this is a maroon */
             }
+            .bb{
+                padding: 0.1em;
+            }
         </style>
 	</head>
 	<body>
@@ -96,10 +99,10 @@
             <div class="pure-g">
                 <div class="pure-u-1-2">
                     <span ng-repeat="r in result">
-                        <button class="bottom-1 pure-button pure-button-primary" ng-click="viewBingo(r.card_id)">
-                            {{r.card_id}}
-                            <p class="pure-button button-secondary" ng-show="r.c == 4" ng-click="viewBingo(r.card_id)">リーチ</p>
-                            <p class="pure-button button-success" ng-show="r.c == 5" ng-click="viewBingo(r.card_id)">ビンゴ</p>
+                        <button class="bb bottom-1 pure-button pure-button-primary" ng-click="viewBingo(r.card_id)">
+                            {{r.card_id}}<br>
+                            <p class="bb pure-button button-secondary" ng-show="r.c == 4" ng-click="viewBingo(r.card_id)">リーチ</p>
+                            <p class="bb pure-button button-success" ng-show="r.c == 5" ng-click="viewBingo(r.card_id)">ビンゴ</p>
                         </button>
                     </span>
                 </div>

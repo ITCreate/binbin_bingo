@@ -29,7 +29,6 @@
           return self.indexOf(x) === i;
         });
         localStorage.setItem("search", $s.searchData);
-        console.log($s.searchData);
         return $h.get('/bingo', {
           params: {
             'n[]': $s.searchData

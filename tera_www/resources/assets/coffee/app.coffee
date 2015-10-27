@@ -21,7 +21,7 @@ app.controller 'Index', ['$scope', '$http', ($s, $h)->
     $s.isSearch = true
     $s.searchData = $s.text.split(',').filter((x,i,self)->self.indexOf(x) is i)
     localStorage.setItem("search", $s.searchData)
-    console.log $s.searchData
+#    console.log $s.searchData
     $h.get('/bingo', {
       params: {
         'n[]' : $s.searchData

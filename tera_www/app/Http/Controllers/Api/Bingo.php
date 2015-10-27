@@ -20,35 +20,35 @@ class Bingo extends Controller {
 			return \App\Bingo::all()->keyBy('id');
 		}else{
 			$x1 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereX(1)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
+				whereX(1)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->get();
 			$x2 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereX(2)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
+				whereX(2)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->get();
 
             $centerNumbers = $numbers;
             $centerNumbers[] = '0';
 			$x3 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereX(3)->whereIn('number', $centerNumbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
+				whereX(3)->whereIn('number', $centerNumbers)->groupBy('card_id')->having('c', '>=', 4)->get();
 			$x4 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereX(4)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
+				whereX(4)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->get();
 			$x5 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereX(5)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
+				whereX(5)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->get();
 
 			$y1 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereY(1)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
+				whereY(1)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->get();
 			$y2 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereY(2)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
+				whereY(2)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->get();
 			$y3 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereY(3)->whereIn('number', $centerNumbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
+				whereY(3)->whereIn('number', $centerNumbers)->groupBy('card_id')->having('c', '>=', 4)->get();
 			$y4 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereY(4)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
+				whereY(4)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->get();
 			$y5 = \App\Bingo::select(\DB::raw('count(*) as c'), 'card_id')->
-				whereY(5)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->with('numbers')->get();
+				whereY(5)->whereIn('number', $numbers)->groupBy('card_id')->having('c', '>=', 4)->get();
 
-            $_xy1 = \App\Bingo::select('number', 'card_id')->whereX(1)->whereY(5)->with('numbers')->get();
-            $_xy2 = \App\Bingo::select('number', 'card_id')->whereX(2)->whereY(4)->with('numbers')->get();
-            $_xy3 = \App\Bingo::select('number', 'card_id')->whereX(3)->whereY(3)->with('numbers')->get();
-            $_xy4 = \App\Bingo::select('number', 'card_id')->whereX(4)->whereY(2)->with('numbers')->get();
-            $_xy5 = \App\Bingo::select('number', 'card_id')->whereX(5)->whereY(1)->with('numbers')->get();
+            $_xy1 = \App\Bingo::select('number', 'card_id')->whereX(1)->whereY(5)->get();
+            $_xy2 = \App\Bingo::select('number', 'card_id')->whereX(2)->whereY(4)->get();
+            $_xy3 = \App\Bingo::select('number', 'card_id')->whereX(3)->whereY(3)->get();
+            $_xy4 = \App\Bingo::select('number', 'card_id')->whereX(4)->whereY(2)->get();
+            $_xy5 = \App\Bingo::select('number', 'card_id')->whereX(5)->whereY(1)->get();
 
             $xy1 = array_merge([], $_xy1->toArray(), $_xy2->toArray(), $_xy3->toArray(),$_xy4->toArray(),$_xy5->toArray());
             $xy1 = collect($xy1);
@@ -62,11 +62,11 @@ class Bingo extends Controller {
                 return $obj['c'] >= 4;
             });
 
-            $_xy1_ = \App\Bingo::select('number', 'card_id')->whereX(1)->whereY(1)->with('numbers')->get();
-            $_xy2_ = \App\Bingo::select('number', 'card_id')->whereX(2)->whereY(2)->with('numbers')->get();
-            $_xy3_ = \App\Bingo::select('number', 'card_id')->whereX(3)->whereY(3)->with('numbers')->get();
-            $_xy4_ = \App\Bingo::select('number', 'card_id')->whereX(4)->whereY(4)->with('numbers')->get();
-            $_xy5_ = \App\Bingo::select('number', 'card_id')->whereX(5)->whereY(5)->with('numbers')->get();
+            $_xy1_ = \App\Bingo::select('number', 'card_id')->whereX(1)->whereY(1)->get();
+            $_xy2_ = \App\Bingo::select('number', 'card_id')->whereX(2)->whereY(2)->get();
+            $_xy3_ = \App\Bingo::select('number', 'card_id')->whereX(3)->whereY(3)->get();
+            $_xy4_ = \App\Bingo::select('number', 'card_id')->whereX(4)->whereY(4)->get();
+            $_xy5_ = \App\Bingo::select('number', 'card_id')->whereX(5)->whereY(5)->get();
 
             $xy2 = array_merge([], $_xy1_->toArray(), $_xy2_->toArray(), $_xy3_->toArray(),$_xy4_->toArray(),$_xy5_->toArray());
             $xy2 = collect($xy2);
@@ -94,6 +94,7 @@ class Bingo extends Controller {
                 $xy1->keyBy('card_id')->toArray(),
                 $xy2->keyBy('card_id')->toArray()
             );
+            
 			return $all;
 		}
 	}
