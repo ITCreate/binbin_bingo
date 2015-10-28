@@ -94,7 +94,7 @@ class Bingo extends Controller {
                 $xy1->keyBy('card_id')->toArray(),
                 $xy2->keyBy('card_id')->toArray()
             );
-            
+
 			return $all;
 		}
 	}
@@ -104,9 +104,9 @@ class Bingo extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $req)
 	{
-		//
+
 	}
 
 	/**
@@ -151,7 +151,9 @@ class Bingo extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$bingo = \App\Bingo::whereCardId($id);
+        $bingo->restore();
+        return $bingo;
 	}
 
 	/**
