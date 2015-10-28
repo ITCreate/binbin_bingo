@@ -106,7 +106,10 @@ class Bingo extends Controller {
 	 */
 	public function create(Request $req)
 	{
-
+        $type = $req->get('type');
+        if($type == "restore"){
+            \App\Bingo::onlyTrashed()->restore();
+        }
 	}
 
 	/**
