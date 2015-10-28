@@ -81,20 +81,21 @@ class Bingo extends Controller {
             });
 
             $all = array_merge(
-                $x1->keyBy('card_id')->toArray(),
-                $x2->keyBy('card_id')->toArray(),
-                $x3->keyBy('card_id')->toArray(),
-                $x4->keyBy('card_id')->toArray(),
-                $x5->keyBy('card_id')->toArray(),
-                $y1->keyBy('card_id')->toArray(),
-                $y2->keyBy('card_id')->toArray(),
-                $y3->keyBy('card_id')->toArray(),
-                $y4->keyBy('card_id')->toArray(),
-                $y5->keyBy('card_id')->toArray(),
-                $xy1->keyBy('card_id')->toArray(),
-                $xy2->keyBy('card_id')->toArray()
+                $x1->toArray(),
+                $x2->toArray(),
+                $x3->toArray(),
+                $x4->toArray(),
+                $x5->toArray(),
+                $y1->toArray(),
+                $y2->toArray(),
+                $y3->toArray(),
+                $y4->toArray(),
+                $y5->toArray(),
+                $xy1->toArray(),
+                $xy2->toArray()
             );
-
+            usort($all, function($a, $b){return $b['c'] - $a['c'];});
+            $all = collect($all)->groupBy('card_id')->map(function($obj){return $obj[0];});
 			return $all;
 		}
 	}
