@@ -25,7 +25,7 @@
       };
       $s.search = function() {
         $s.isSearch = true;
-        $s.searchData = $s.text.replace(" ", ',').replace(",,", ',').split(',').filter(function(x, i, self) {
+        $s.searchData = $s.text.replace(/\ /g, ',').replace(/,,/g, ',').split(',').filter(function(x, i, self) {
           return self.indexOf(x) === i;
         });
         localStorage.setItem("search", $s.searchData);
