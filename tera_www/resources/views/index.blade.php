@@ -1,6 +1,6 @@
 <html ng-app="bingo">
 	<head>
-		<title>Laravel</title>
+		<title>binbin bingo</title>
 		
 		<link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
